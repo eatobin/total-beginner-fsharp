@@ -1,4 +1,4 @@
-module EricTests
+module total.EricTests
 
 open Xunit
 open FsUnit.Xunit

@@ -1,6 +1,16 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b91db19b_002Ddb30_002D4939_002D8507_002Dc860364e9dc1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EricTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4d0b0a56_002D1754_002D47b7_002D987a_002Dcb6ee6e64297/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="These are from MathStuff" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::69F0949E-17AE-48D6-B186-247A504F7BDA::net5.0::EricTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::69F0949E-17AE-48D6-B186-247A504F7BDA::net5.0::total.MathStuffTests.These are from MathStuff&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8d430341_002Ddd6e_002D4fec_002D97f9_002D2515976c53cb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EricTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::69F0949E-17AE-48D6-B186-247A504F7BDA::net5.0::total.EricTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>
