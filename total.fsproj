@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="MathStuff.fs" />
-        <Compile Include="MathStuffTests.fs" />
+        <Compile Include="Borrower.fs" />
+        <Compile Include="BorrowerTests.fs" />
         <Compile Include="Tests.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>

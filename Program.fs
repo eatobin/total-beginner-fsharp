@@ -8,6 +8,6 @@ let from whom = sprintf "from %s" whom
 
 [<EntryPoint>]
 let main _ =
-    let message = from "F# and Eric!" // Call the function
+    let message = from "F# and Ericky!" // Call the function
     printfn "Hello world %s" message
     0 // return an integer exit code
