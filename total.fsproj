@@ -10,7 +10,6 @@
     <ItemGroup>
         <Compile Include="Borrower.fs" />
         <Compile Include="BorrowerTests.fs" />
-        <Compile Include="Tests.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

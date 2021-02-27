@@ -4,12 +4,15 @@ open Xunit
 open FsUnit.Xunit
 open total.Borrower
 
-[<Fact>]
-let ``These are from Borrower`` () =
-    let res = eatAdd 66 66
-    res |> should equal 132
+let br1 = makeBorrower "Borrower1" 1
 
 [<Fact>]
-let ``This one from Borrower too`` () =
-    let res2 = eatSubtract 99 9
-    res2 |> should equal 90
+let ``getName test`` () = getName br1 |> should equal "Borrower1"
+
+[<Fact>]
+let ``getMaxBooks test`` () = getMaxBooks br1 |> should equal 1
+
+[<Fact>]
+let ``setName test`` () =
+    setName br1 "Jack"
+    |> should equal { name = "Jack"; maxBooks = 1 }
