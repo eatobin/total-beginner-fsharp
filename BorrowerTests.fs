@@ -19,12 +19,12 @@ let ``getMaxBooks test`` () = getMaxBooks br1 |> should equal 1
 [<Fact>]
 let ``setName test`` () =
     setName br1 "Jack"
-    |> should equal { Name = "Jack"; MaxBooks = 1 }
+    |> should equal { name = "Jack"; maxBooks = 1 }
 
 [<Fact>]
 let ``setMaxBooks test`` () =
     setMaxBooks br1 11
-    |> should equal { Name = "Borrower1"; MaxBooks = 11 }
+    |> should equal { name = "Borrower1"; maxBooks = 11 }
 
 [<Fact>]
 let ``borrowerToString test`` () =
@@ -35,7 +35,3 @@ let ``borrowerToString test`` () =
 let ``borrowerToJSONString test`` () =
     borrowerToJsonString br1
     |> should equal jsonStringBr
-
-//it should "turn a Borrower into a JSON string" in {
-//    assert(borrowerToJsonString(br1) == jsonStringBr)
-//  }
