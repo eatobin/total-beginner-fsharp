@@ -11,3 +11,6 @@ let setName (b: Borrower) n = { b with name = n }
 let getMaxBooks (b: Borrower) = b.maxBooks
 
 let setMaxBooks (b: Borrower) mb = { b with maxBooks = mb }
+
+let borrowerToString b =
+    sprintf "%s (%i books)" (getName b) (getMaxBooks b)

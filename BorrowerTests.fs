@@ -21,3 +21,8 @@ let ``setName test`` () =
 let ``setMaxBooks test`` () =
     setMaxBooks br1 11
     |> should equal { name = "Borrower1"; maxBooks = 11 }
+
+[<Fact>]
+let ``borrowerToString test`` () =
+    borrowerToString br1
+    |> should equal "Borrower1 (1 books)"
