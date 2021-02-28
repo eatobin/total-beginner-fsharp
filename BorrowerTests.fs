@@ -30,3 +30,12 @@ let ``setMaxBooks test`` () =
 let ``borrowerToString test`` () =
     borrowerToString br1
     |> should equal "Borrower1 (1 books)"
+
+[<Fact>]
+let ``borrowerToJSONString test`` () =
+    borrowerToJsonString br1
+    |> should equal jsonStringBr
+
+//it should "turn a Borrower into a JSON string" in {
+//    assert(borrowerToJsonString(br1) == jsonStringBr)
+//  }

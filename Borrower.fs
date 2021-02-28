@@ -20,3 +20,5 @@ let config =
 
 let borrowerJsonStringToBorrower (borrowerString: string) =
     Json.deserializeEx<Borrower> config borrowerString
+
+let borrowerToJsonString (br: Borrower) = Json.serializeU br
