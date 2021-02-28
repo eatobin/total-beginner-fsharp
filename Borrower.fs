@@ -1,16 +1,22 @@
 module total.Borrower
 
-type Borrower = { name: string; maxBooks: int }
+open FSharp.Json
 
-let makeBorrower n mb = { name = n; maxBooks = mb }
+type Borrower = { Name: string; MaxBooks: int }
 
-let getName (b: Borrower) = b.name
+let getName (b: Borrower) = b.Name
 
-let setName (b: Borrower) n = { b with name = n }
+let setName (b: Borrower) (n: string) = { b with Name = n }
 
-let getMaxBooks (b: Borrower) = b.maxBooks
+let getMaxBooks (b: Borrower) = b.MaxBooks
 
-let setMaxBooks (b: Borrower) mb = { b with maxBooks = mb }
+let setMaxBooks (b: Borrower) mb = { b with MaxBooks = mb }
 
 let borrowerToString b =
     sprintf "%s (%i books)" (getName b) (getMaxBooks b)
+
+let config =
+    JsonConfig.create (jsonFieldNaming = Json.lowerCamelCase)
+
+let borrowerJsonStringToBorrower (borrowerString: string) =
+    Json.deserializeEx<Borrower> config borrowerString
