@@ -4,7 +4,7 @@ open Xunit
 open FsUnit.Xunit
 open total.Borrower
 
-let jsonStringBr: string =
+let jsonStringBr: JsonString =
     "{\"name\":\"Borrower1\",\"maxBooks\":1}"
 
 let br1: Borrower =
