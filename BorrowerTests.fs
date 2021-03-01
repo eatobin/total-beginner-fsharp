@@ -8,7 +8,7 @@ let jsonStringBr: JsonString =
     "{\"name\":\"Borrower1\",\"maxBooks\":1}"
 
 let br1: Borrower =
-    borrowerJsonStringToBorrower (jsonStringBr)
+    borrowerJsonStringToBorrower jsonStringBr
 
 [<Fact>]
 let ``getName test`` () = getName br1 |> should equal "Borrower1"
