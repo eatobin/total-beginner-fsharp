@@ -20,14 +20,25 @@ let bk3 =
           title = "Title3"
           author = "Author3" }
 
-//  "A Book" should "create itself properly" in {
-//    assert(getTitle(bk1) == "Title1")
-//    assert(getAuthor(bk1) == "Author1")
-//    assert(getBorrower(bk1).isEmpty)
-//    assert(getBorrower(bk2).contains(br2))
-//    assert(getBorrower(bk3).isEmpty)
-//  }
-//
+[<Fact>]
+let ``A Book should have a title`` () = getTitle bk1 |> should equal "Title1"
+
+[<Fact>]
+let ``A Book should have an author`` () = getAuthor bk1 |> should equal "Author1"
+
+[<Fact>]
+let ``A Book could not have an borrower`` () = getMaybeBorrower bk1 |> should be null
+
+[<Fact>]
+let ``A Book could have a borrower`` () =
+    getMaybeBorrower bk2
+    |> Option.get
+    |> should equal br2
+
+[<Fact>]
+let ``A default Book should not have a borrower`` () = getMaybeBorrower bk3 |> should be null
+
+
 //  it should "return a string \"Title1 by Author1; Available\"" in {
 //    assert(bookToString(bk1) == "Title1 by Author1; Available")
 //  }
