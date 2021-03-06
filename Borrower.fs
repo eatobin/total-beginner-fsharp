@@ -13,7 +13,7 @@ let getMaxBooks (br: Borrower): int = br.maxBooks
 
 let setMaxBooks (br: Borrower) (mb: int): Borrower = { br with maxBooks = mb }
 
-let borrowerToString (br: Borrower): string =
+let toString (br: Borrower): string =
     sprintf "%s (%i books)" (getName br) (getMaxBooks br)
 
 let borrowerJsonStringToBorrower (borrowerString: JsonString): Borrower =

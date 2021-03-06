@@ -28,7 +28,7 @@ let ``setMaxBooks test`` () =
 
 [<Fact>]
 let ``borrowerToString test`` () =
-    borrowerToString br1
+    toString br1
     |> should equal "Borrower1 (1 books)"
 
 [<Fact>]
