@@ -5,16 +5,16 @@ open FSharp.Json
 type Borrower = { name: string; maxBooks: int }
 type JsonString = string
 
-let getName (b: Borrower): string = b.name
+let getName (br: Borrower): string = br.name
 
-let setName (b: Borrower) (n: string): Borrower = { b with name = n }
+let setName (br: Borrower) (n: string): Borrower = { br with name = n }
 
-let getMaxBooks (b: Borrower): int = b.maxBooks
+let getMaxBooks (br: Borrower): int = br.maxBooks
 
-let setMaxBooks (b: Borrower) (mb: int): Borrower = { b with maxBooks = mb }
+let setMaxBooks (br: Borrower) (mb: int): Borrower = { br with maxBooks = mb }
 
-let borrowerToString (b: Borrower): string =
-    sprintf "%s (%i books)" (getName b) (getMaxBooks b)
+let borrowerToString (br: Borrower): string =
+    sprintf "%s (%i books)" (getName br) (getMaxBooks br)
 
 let borrowerJsonStringToBorrower (borrowerString: JsonString): Borrower =
     Json.deserialize<Borrower> borrowerString
