@@ -1,21 +1,30 @@
 module total.Book
 
 open total.Borrower
-
-type InBook = InBook of title: string * author: string
-type OutBook = OutBook of title: string * author: string * borrower: Borrower
+//open FSharp.Json
 
 type Book =
-    | InBook of title: string * author: string
-    | OutBook of title: string * author: string * borrower: Borrower
+    { title: string
+      author: string
+      maybeBorrower: Borrower option }
+
+let getTitle bk = bk.title
+
+let getAuthor bk = bk.author
+
+let getMaybeBorrower bk = bk.maybeBorrower
+let setMaybeBorrower bk br = { bk with maybeBorrower = br }
+
+let availableString bk =
+    match (getMaybeBorrower bk) with
+    | Some br -> sprintf "Checked out to %s" (getName br)
+    | None -> "Available"
 
 
 
-//let getTitle (InBook (titleX, _)): string = titleX
-//    match bk with
-//    | InBook (t, _) -> t
-//    | OutBook (t, _, _) -> t
-//
+
+
+
 //let setTitle (bk: Book) (title: string): Book =
 //    match bk with
 //    | InBook (_, a) -> InBook(title, a)
@@ -51,7 +60,3 @@ type Book =
 ////
 ////let setBorrower (iBk: InBook) (br: Borrower): OutBook = { inBook = iBk; borrower = br }
 ////
-let availableString (bk: Book): string =
-    match bk with
-    | InBook _ -> "Available"
-    | OutBook (_, _, br) -> sprintf "Checked out to %s" (getName br)
