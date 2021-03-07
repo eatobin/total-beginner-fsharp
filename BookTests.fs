@@ -9,7 +9,7 @@ let jsonStringBk1: JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":null}"
 
 let jsonStringBk2: JsonString =
-    "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
+    "{\"title\":\"Title1X\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
 
 let br2 = { name = "Borrower2"; maxBooks = 2 }
 let bk1 = bookJsonStringToBook (jsonStringBk1)
@@ -39,15 +39,25 @@ let ``A Book could have a borrower`` () =
 let ``A default Book should not have a borrower`` () = getMaybeBorrower bk3 |> should be null
 
 [<Fact>]
-let ``A book return a string "Title1 by Author1; Available"`` () =
+let ``A book should return a string "Title1 by Author1; Available"`` () =
     toString bk1
     |> should equal "Title1 by Author1; Available"
 
 [<Fact>]
-let ``A book return a string "Title1 by Author1; Checked out to Borrower2"`` () =
+let ``A book should return a string "Title1 by Author1; Checked out to Borrower2"`` () =
     toString bk2
     |> should equal "Title1 by Author1; Checked out to Borrower2"
 
+[<Fact>]
+let ``A book without borrower should convert from JSON`` () =
+    bookJsonStringToBook jsonStringBk1
+    |> should equal bk1
+
+// TODO Fix no borrower from JSON
+[<Fact>]
+let ``A book with borrower should convert from JSON`` () =
+    bookJsonStringToBook jsonStringBk2
+    |> should equal bk3
 
 //  it should "convert from JSON" in {
 //    val bkJson1: Either[Error, Book] = bookJsonStringToBook(jsonStringBk1)
