@@ -39,13 +39,16 @@ let ``A Book could have a borrower`` () =
 let ``A default Book should not have a borrower`` () = getMaybeBorrower bk3 |> should be null
 
 [<Fact>]
-let ``A book return a string "Title1 by Author1; Available"`` () = toString bk1 |> should equal "Title1 by Author1; Available"
+let ``A book return a string "Title1 by Author1; Available"`` () =
+    toString bk1
+    |> should equal "Title1 by Author1; Available"
+
+[<Fact>]
+let ``A book return a string "Title1 by Author1; Checked out to Borrower2"`` () =
+    toString bk2
+    |> should equal "Title1 by Author1; Checked out to Borrower2"
 
 
-//  it should "return a string \"Title1 by Author1; Checked out to Borrower2\"" in {
-//    assert(bookToString(bk2) == "Title1 by Author1; Checked out to Borrower2")
-//  }
-//
 //  it should "convert from JSON" in {
 //    val bkJson1: Either[Error, Book] = bookJsonStringToBook(jsonStringBk1)
 //    assert(bkJson1 == Right(bk1))
