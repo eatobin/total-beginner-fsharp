@@ -31,9 +31,7 @@ let ``A Book could not have an borrower`` () = getBorrower bk1 |> should be null
 
 [<Fact>]
 let ``A Book could have a borrower`` () =
-    getBorrower bk2
-    |> Option.get
-    |> should equal br2
+    getBorrower bk2 |> Option.get |> should equal br2
 
 [<Fact>]
 let ``A default Book should not have a borrower`` () = getBorrower bk3 |> should be null
@@ -53,7 +51,6 @@ let ``A book without borrower should convert from JSON`` () =
     bookJsonStringToBook jsonStringBk1
     |> should equal bk1
 
-// TODO Fix no borrower from JSON
 [<Fact>]
 let ``A book with borrower should convert from JSON`` () =
     bookJsonStringToBook jsonStringBk2
