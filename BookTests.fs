@@ -9,11 +9,11 @@ let jsonStringBk1: JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":null}"
 
 let jsonStringBk2: JsonString =
-    "{\"title\":\"Title1X\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
+    "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
 
 let br2 = { name = "Borrower2"; maxBooks = 2 }
 let bk1 = bookJsonStringToBook (jsonStringBk1)
-let bk2 = setMaybeBorrower bk1 (Some(br2))
+let bk2 = setBorrower bk1 (Some(br2))
 
 let bk3 =
     { defaultBook with
@@ -27,16 +27,16 @@ let ``A Book should have a title`` () = getTitle bk1 |> should equal "Title1"
 let ``A Book should have an author`` () = getAuthor bk1 |> should equal "Author1"
 
 [<Fact>]
-let ``A Book could not have an borrower`` () = getMaybeBorrower bk1 |> should be null
+let ``A Book could not have an borrower`` () = getBorrower bk1 |> should be null
 
 [<Fact>]
 let ``A Book could have a borrower`` () =
-    getMaybeBorrower bk2
+    getBorrower bk2
     |> Option.get
     |> should equal br2
 
 [<Fact>]
-let ``A default Book should not have a borrower`` () = getMaybeBorrower bk3 |> should be null
+let ``A default Book should not have a borrower`` () = getBorrower bk3 |> should be null
 
 [<Fact>]
 let ``A book should return a string "Title1 by Author1; Available"`` () =
@@ -57,7 +57,7 @@ let ``A book without borrower should convert from JSON`` () =
 [<Fact>]
 let ``A book with borrower should convert from JSON`` () =
     bookJsonStringToBook jsonStringBk2
-    |> should equal bk3
+    |> should equal bk2
 
 //  it should "convert from JSON" in {
 //    val bkJson1: Either[Error, Book] = bookJsonStringToBook(jsonStringBk1)

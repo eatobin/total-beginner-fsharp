@@ -6,23 +6,23 @@ open FSharp.Json
 type Book =
     { title: string
       author: string
-      maybeBorrower: Borrower option }
+      borrower: Borrower option }
 
 let defaultBook =
     { title = ""
       author = ""
-      maybeBorrower = None }
+      borrower = None }
 
 let getTitle bk = bk.title
 
 let getAuthor bk = bk.author
 
-let getMaybeBorrower bk = bk.maybeBorrower
+let getBorrower bk = bk.borrower
 
-let setMaybeBorrower bk br = { bk with maybeBorrower = br }
+let setBorrower bk br = { bk with borrower = br }
 
 let availableString bk =
-    match (getMaybeBorrower bk) with
+    match (getBorrower bk) with
     | Some br -> sprintf "Checked out to %s" (getName br)
     | None -> "Available"
 
