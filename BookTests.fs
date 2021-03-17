@@ -56,15 +56,10 @@ let ``A book with borrower should convert from JSON`` () =
     bookJsonStringToBook jsonStringBk2
     |> should equal bk2
 
-//  it should "convert from JSON" in {
-//    val bkJson1: Either[Error, Book] = bookJsonStringToBook(jsonStringBk1)
-//    assert(bkJson1 == Right(bk1))
-//    val bkJson2: Either[Error, Book] = bookJsonStringToBook(jsonStringBk2)
-//    assert(bkJson2 == Right(bk2))
-//  }
-//
-//  it should "turn a Book into a JSON string" in {
-//    assert(bookToJsonString(bk1) == jsonStringBk1)
-//  }
-//
-//}
+[<Fact>]
+let ``A book without borrower should convert to JSON`` () =
+    bookToJsonString bk1 |> should equal jsonStringBk1
+
+[<Fact>]
+let ``A book with borrower should convert to JSON`` () =
+    bookToJsonString bk2 |> should equal jsonStringBk2
