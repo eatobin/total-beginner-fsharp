@@ -13,7 +13,7 @@ let jsonStringBk2: JsonString =
 
 let br2 = { name = "Borrower2"; maxBooks = 2 }
 let bk1 = bookJsonStringToBook (jsonStringBk1)
-let bk2 = setBorrower bk1 (Some(br2))
+let bk2 = setBorrower (Some(br2)) bk1
 
 let bk3 =
     { defaultBook with

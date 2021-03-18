@@ -19,7 +19,7 @@ let getAuthor bk = bk.author
 
 let getBorrower bk = bk.borrower
 
-let setBorrower bk br = { bk with borrower = br }
+let setBorrower br bk = { bk with borrower = br }
 
 let availableString bk =
     match (getBorrower bk) with
