@@ -28,7 +28,7 @@ let private availableString bk =
     | None -> "Available"
 
 let toString bk =
-    sprintf "%s by %s; %s" (getTitle (bk)) (getAuthor (bk)) (availableString (bk))
+    sprintf "%s by %s; %s" (getTitle bk) (getAuthor bk) (availableString bk)
 
 let jsonStringToBook (bookString: JsonString): Book = Json.deserialize<Book> bookString
 
