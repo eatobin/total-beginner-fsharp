@@ -22,7 +22,7 @@ let getBorrower bk = bk.borrower
 
 let setBorrower br bk = { bk with borrower = br }
 
-let availableString bk =
+let private availableString bk =
     match (getBorrower bk) with
     | Some br -> sprintf "Checked out to %s" (Borrower.getName br)
     | None -> "Available"
