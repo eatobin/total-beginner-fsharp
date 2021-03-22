@@ -51,3 +51,11 @@ let ``A Library should add a Borrower or Book correctly - 3`` () =
 [<Fact>]
 let ``A Library should add a Borrower or Book correctly - 4`` () =
     Library.addItem bk2 bks1 |> should equal bks1
+
+[<Fact>]
+let ``A Library should remove a Book correctly - 1`` () =
+    Library.removeBook bk3 bks2 |> should equal bks1
+
+[<Fact>]
+let ``A Library should remove a Book correctly - 2`` () =
+    Library.removeBook bk3 bks1 |> should equal bks1
