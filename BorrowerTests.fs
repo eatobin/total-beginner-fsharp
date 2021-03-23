@@ -18,10 +18,7 @@ let brWonky: Result<Borrower.Borrower, string> = Borrower.jsonStringToBorrower w
 let ``getName test - br1`` () =
     match br1 with
     | Ok br -> Borrower.getName br |> should equal "Borrower1"
-    | Error e ->
-        e
-        |> should equal "Error at: `$.name`
-Expecting a string but instead got: null"
+    | Error e -> e |> should equal ""
 
 [<Fact>]
 let ``getName test - brWonky`` () =
@@ -36,10 +33,7 @@ Expecting a string but instead got: null"
 let ``getMaxBooks test - br1`` () =
     match br1 with
     | Ok br -> Borrower.getMaxBooks br |> should equal 1
-    | Error e ->
-        e
-        |> should equal "Error at: `$.name`
-Expecting a string but instead got: null"
+    | Error e -> e |> should equal ""
 
 [<Fact>]
 let ``setName test - br1`` () =
@@ -50,10 +44,7 @@ let ``setName test - br1`` () =
             equal
                { Borrower.name = "Jack"
                  Borrower.maxBooks = 1 }
-    | Error e ->
-        e
-        |> should equal "Error at: `$.name`
-Expecting a string but instead got: null"
+    | Error e -> e |> should equal ""
 
 [<Fact>]
 let ``setMaxBooks test - br1`` () =
@@ -64,10 +55,7 @@ let ``setMaxBooks test - br1`` () =
             equal
                { Borrower.name = "Borrower1"
                  Borrower.maxBooks = 11 }
-    | Error e ->
-        e
-        |> should equal "Error at: `$.name`
-Expecting a string but instead got: null"
+    | Error e -> e |> should equal ""
 
 
 
