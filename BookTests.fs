@@ -11,6 +11,10 @@ let getOrElse d =
 let jsonStringBk1: Book.JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":null}"
 
+//OR - also okay!
+//let jsonStringBk1: Book.JsonString =
+//    "{\"title\":\"Title1\",\"author\":\"Author1\"}"
+
 let jsonStringBk2: Book.JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
 
