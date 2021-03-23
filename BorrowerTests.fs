@@ -41,7 +41,19 @@ let ``getMaxBooks test - br1`` () =
         |> should equal "Error at: `$.name`
 Expecting a string but instead got: null"
 
-
+[<Fact>]
+let ``setName test - br1`` () =
+    match br1 with
+    | Ok br ->
+        Borrower.setName "Jack" br
+        |> should
+            equal
+               { Borrower.name = "Jack"
+                 Borrower.maxBooks = 1 }
+    | Error e ->
+        e
+        |> should equal "Error at: `$.name`
+Expecting a string but instead got: null"
 
 
 
