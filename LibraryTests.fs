@@ -65,3 +65,8 @@ let ``A Library should find a Book or Borrower correctly - 1`` () =
     Library.findItem "Title1" bks2 Book.getTitle
     |> Option.get
     |> should equal bk1
+
+[<Fact>]
+let ``A Library should find a Book or Borrower correctly - 2`` () =
+    Library.findItem "Title11" bks2 Book.getTitle
+    |> should equal None
