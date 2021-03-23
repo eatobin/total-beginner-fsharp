@@ -57,16 +57,15 @@ let ``setMaxBooks test - br1`` () =
                  Borrower.maxBooks = 11 }
     | Error e -> e |> should equal ""
 
+[<Fact>]
+let ``toString test - br1`` () =
+    match br1 with
+    | Ok br ->
+        Borrower.toString br
+        |> should equal "Borrower1 (1 books)"
+    | Error e -> e |> should equal ""
 
 
-//[<Fact>]
-//let ``setMaxBooks test`` () =
-//    Borrower.setMaxBooks 11 br1
-//    |> should
-//        equal
-//           { Borrower.name = "Borrower1"
-//             Borrower.maxBooks = 11 }
-//
 //[<Fact>]
 //let ``borrowerToString test`` () =
 //    Borrower.toString br1
