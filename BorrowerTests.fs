@@ -32,10 +32,21 @@ let ``getName test - brWonky`` () =
         |> should equal "Error at: `$.name`
 Expecting a string but instead got: null"
 
-//[<Fact>]
-//let ``getMaxBooks test`` () =
-//    Borrower.getMaxBooks br1 |> should equal 1
-//
+[<Fact>]
+let ``getMaxBooks test - br1`` () =
+    match br1 with
+    | Ok br -> Borrower.getMaxBooks br |> should equal 1
+    | Error e ->
+        e
+        |> should equal "Error at: `$.name`
+Expecting a string but instead got: null"
+
+
+
+
+
+
+
 //[<Fact>]
 //let ``setName test`` () =
 //    Borrower.setName "Jack" br1
