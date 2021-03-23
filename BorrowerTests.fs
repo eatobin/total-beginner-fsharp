@@ -23,7 +23,7 @@ let ``getName test - br1`` () =
 [<Fact>]
 let ``getName test - brWonky`` () =
     match brWonky with
-    | Ok br -> Borrower.getName br |> should equal "Borrower1"
+    | Ok br -> Borrower.getName br |> should equal ""
     | Error e ->
         e
         |> should equal "Error at: `$.name`
@@ -65,13 +65,10 @@ let ``toString test - br1`` () =
         |> should equal "Borrower1 (1 books)"
     | Error e -> e |> should equal ""
 
-
-//[<Fact>]
-//let ``borrowerToString test`` () =
-//    Borrower.toString br1
-//    |> should equal "Borrower1 (1 books)"
-//
-//[<Fact>]
-//let ``borrowerToJSONString test`` () =
-//    Borrower.borrowerToJsonString br1
-//    |> should equal jsonStringBr
+[<Fact>]
+let ``borrowerToJSONString test - br1`` () =
+    match br1 with
+    | Ok br ->
+        Borrower.borrowerToJsonString br
+        |> should equal jsonStringBr
+    | Error e -> e |> should equal ""
