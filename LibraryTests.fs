@@ -33,8 +33,17 @@ let bk3 =
       Book.author = "Author3"
       Book.borrower = Some(br3) }
 
+let bk4 =
+    { Book.title = "Title4"
+      Book.author = "Author4"
+      Book.borrower =
+          Some
+              ({ Borrower.name = "Borrower3"
+                 Borrower.maxBooks = 3 }) }
+
 let bks1 = [ bk1; bk2 ]
 let bks2 = [ bk3; bk1; bk2 ]
+let bks3 = [ bk1; bk2; bk3; bk4 ]
 
 [<Fact>]
 let ``A Library should add a Borrower or Book correctly - 1`` () =
