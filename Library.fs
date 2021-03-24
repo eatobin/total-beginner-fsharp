@@ -12,5 +12,4 @@ let findItem (tgt: string) (coll: 'a list) (f: ('a -> string)): 'a option =
     if res.IsEmpty then None else Some(res.Head)
 
 let getBooksForBorrower (br: Borrower.Borrower) (bks: Book.Book list): Book.Book list =
-    let extractBorrower bk = Book.getBorrower bk |> Option.get
-    List.filter (fun bk -> extractBorrower bk = br) bks
+    List.filter (fun bk -> Option.contains br (Book.getBorrower bk)) bks

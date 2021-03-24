@@ -90,3 +90,8 @@ let ``A Library should find a Book or Borrower correctly - 3`` () =
 let ``A Library should find a Book or Borrower correctly - 4`` () =
     Library.findItem "Borrower11" brs2 Borrower.getName
     |> should equal None
+
+[<Fact>]
+let ``A Library should find List[Book] for a Borrower - 1`` () =
+    Library.getBooksForBorrower br2 bks1
+    |> should be Empty
