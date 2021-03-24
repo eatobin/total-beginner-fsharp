@@ -95,3 +95,8 @@ let ``A Library should find a Book or Borrower correctly - 4`` () =
 let ``A Library should find List[Book] for a Borrower - 1`` () =
     Library.getBooksForBorrower br2 bks1
     |> should be Empty
+
+[<Fact>]
+let ``A Library should find List[Book] for a Borrower - 2`` () =
+    Library.getBooksForBorrower br1 bks1
+    |> should equal [ bk1 ]
