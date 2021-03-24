@@ -70,3 +70,14 @@ let ``A Library should find a Book or Borrower correctly - 1`` () =
 let ``A Library should find a Book or Borrower correctly - 2`` () =
     Library.findItem "Title11" bks2 Book.getTitle
     |> should equal None
+
+[<Fact>]
+let ``A Library should find a Book or Borrower correctly - 3`` () =
+    Library.findItem "Borrower1" brs2 Borrower.getName
+    |> Option.get
+    |> should equal br1
+
+[<Fact>]
+let ``A Library should find a Book or Borrower correctly - 4`` () =
+    Library.findItem "Borrower11" brs2 Borrower.getName
+    |> should equal None
