@@ -13,3 +13,10 @@ let findItem (tgt: string) (coll: 'a list) (f: ('a -> string)): 'a option =
 
 let getBooksForBorrower (br: Borrower.Borrower) (bks: Book.Book list): Book.Book list =
     List.filter (fun bk -> Option.contains br (Book.getBorrower bk)) bks
+
+let numBooksOut br bks = List.length (getBooksForBorrower br bks)
+
+let notMaxedOut br bks =
+    numBooksOut br bks < Borrower.getMaxBooks br
+
+let bookNotOut bk = Option.isNone (Book.getBorrower bk)
