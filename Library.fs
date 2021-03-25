@@ -21,3 +21,17 @@ let notMaxedOut br bks =
     numBooksOut br bks < Borrower.getMaxBooks br
 
 let bookNotOut bk = Book.getBorrower bk |> Option.isNone
+
+let checkOut (n: string) (t: string) (brs: Borrower.Borrower list) (bks: Book.Book list): Book.Book list =
+    let mbk = findItem t bks Book.getTitle
+    let mbr = findItem n brs Borrower.getName
+
+    if (mbk |> Option.isSome)
+       && (mbr |> Option.isSome)
+       && (notMaxedOut (mbr |> Option.get) bks)
+       && (bookNotOut (mbk |> Option.get)) then
+        let newBook = Book.setBorrower mbr (mbk |> Option.get)
+        let fewerBooks = removeBook (mbk |> Option.get) bks
+        addItem newBook fewerBooks
+    else
+        bks
