@@ -41,6 +41,14 @@ let bk4 =
               ({ Borrower.name = "Borrower3"
                  Borrower.maxBooks = 3 }) }
 
+let bk5 =
+    { Book.title = "Title2"
+      Book.author = "Author2"
+      Book.borrower =
+          Some
+              ({ Borrower.name = "Borrower2"
+                 Borrower.maxBooks = 2 }) }
+
 let bks1 = [ bk1; bk2 ]
 let bks2 = [ bk3; bk1; bk2 ]
 let bks3 = [ bk1; bk2; bk3; bk4 ]
@@ -110,3 +118,23 @@ let ``A Library should find List[Book] for a Borrower - 3`` () =
 let ``A Library should check out a Book correctly - 1`` () =
     Library.checkOut "Borrower2" "Title1" brs1 bks1
     |> should equal bks1
+
+[<Fact>]
+let ``A Library should check out a Book correctly - 2`` () =
+    Library.checkOut "Borrower2" "NoTitle" brs1 bks1
+    |> should equal bks1
+
+[<Fact>]
+let ``A Library should check out a Book correctly - 3`` () =
+    Library.checkOut "NoName" "Title1" brs1 bks1
+    |> should equal bks1
+
+[<Fact>]
+let ``A Library should check out a Book correctly - 4`` () =
+    Library.checkOut "Borrower1" "Title2" brs1 bks1
+    |> should equal bks1
+
+[<Fact>]
+let ``A Library should check out a Book correctly - 5`` () =
+    Library.checkOut "Borrower2" "Title2" brs1 bks1
+    |> should equal [ bk5; bk1 ]
