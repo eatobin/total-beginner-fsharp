@@ -3,16 +3,16 @@ module total.BorrowerTests
 open Xunit
 open FsUnit.Xunit
 
-let jsonStringBr: Borrower.JsonString =
+let jsonStringBr : Borrower.JsonString =
     "{\"name\":\"Borrower1\",\"maxBooks\":1}"
 
-let wonkyBr: Borrower.JsonString =
+let wonkyBr : Borrower.JsonString =
     "{\"wonky\":\"Borrower1\",\"maxBooks\":1}"
 
-let br1: Result<Borrower.Borrower, string> =
+let br1 : Result<Borrower.Borrower, string> =
     Borrower.jsonStringToBorrower jsonStringBr
 
-let brWonky: Result<Borrower.Borrower, string> = Borrower.jsonStringToBorrower wonkyBr
+let brWonky : Result<Borrower.Borrower, string> = Borrower.jsonStringToBorrower wonkyBr
 
 [<Fact>]
 let ``getName test - br1`` () =
@@ -26,7 +26,9 @@ let ``getName test - brWonky`` () =
     | Ok br -> Borrower.getName br |> should equal ""
     | Error e ->
         e
-        |> should equal "Error at: `$.name`
+        |> should
+            equal
+            "Error at: `$.name`
 Expecting a string but instead got: null"
 
 [<Fact>]
@@ -42,8 +44,8 @@ let ``setName test - br1`` () =
         Borrower.setName "Jack" br
         |> should
             equal
-               { Borrower.name = "Jack"
-                 Borrower.maxBooks = 1 }
+            { Borrower.name = "Jack"
+              Borrower.maxBooks = 1 }
     | Error e -> e |> should equal ""
 
 [<Fact>]
@@ -53,8 +55,8 @@ let ``setMaxBooks test - br1`` () =
         Borrower.setMaxBooks 11 br
         |> should
             equal
-               { Borrower.name = "Borrower1"
-                 Borrower.maxBooks = 11 }
+            { Borrower.name = "Borrower1"
+              Borrower.maxBooks = 11 }
     | Error e -> e |> should equal ""
 
 [<Fact>]

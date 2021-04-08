@@ -38,16 +38,16 @@ let bk4 =
       Book.author = "Author4"
       Book.borrower =
           Some
-              ({ Borrower.name = "Borrower3"
-                 Borrower.maxBooks = 3 }) }
+              { Borrower.name = "Borrower3"
+                Borrower.maxBooks = 3 } }
 
 let bk5 =
     { Book.title = "Title2"
       Book.author = "Author2"
       Book.borrower =
           Some
-              ({ Borrower.name = "Borrower2"
-                 Borrower.maxBooks = 2 }) }
+              { Borrower.name = "Borrower2"
+                Borrower.maxBooks = 2 } }
 
 let bks1 = [ bk1; bk2 ]
 let bks2 = [ bk3; bk1; bk2 ]

@@ -8,14 +8,14 @@ let getOrElse d =
     | Ok a -> a
     | Error _ -> d
 
-let jsonStringBk1: Book.JsonString =
+let jsonStringBk1 : Book.JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":null}"
 
 //OR - also okay!
 //let jsonStringBk1: Book.JsonString =
 //    "{\"title\":\"Title1\",\"author\":\"Author1\"}"
 
-let jsonStringBk2: Book.JsonString =
+let jsonStringBk2 : Book.JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
 
 let br2 =
@@ -23,7 +23,7 @@ let br2 =
       Borrower.maxBooks = 2 }
 
 let bk1 =
-    Book.jsonStringToBook (jsonStringBk1)
+    Book.jsonStringToBook jsonStringBk1
     |> getOrElse
         { Book.defaultBook with
               title = ""
