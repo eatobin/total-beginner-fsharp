@@ -18,7 +18,7 @@ let jsonStringBk1: Book.JsonString =
 let jsonStringBk2: Book.JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
 
-let br2 =
+let br2: Borrower.Borrower =
     { Borrower.name = "Borrower2"
       Borrower.maxBooks = 2 }
 
