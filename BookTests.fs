@@ -8,14 +8,14 @@ let getOrElse d =
     | Ok a -> a
     | Error _ -> d
 
-let jsonStringBk1 : Book.JsonString =
+let jsonStringBk1: Book.JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":null}"
 
 //OR - also okay!
 //let jsonStringBk1: Book.JsonString =
 //    "{\"title\":\"Title1\",\"author\":\"Author1\"}"
 
-let jsonStringBk2 : Book.JsonString =
+let jsonStringBk2: Book.JsonString =
     "{\"title\":\"Title1\",\"author\":\"Author1\",\"borrower\":{\"name\":\"Borrower2\",\"maxBooks\":2}}"
 
 let br2 =
@@ -24,10 +24,7 @@ let br2 =
 
 let bk1 =
     Book.jsonStringToBook jsonStringBk1
-    |> getOrElse
-        { Book.defaultBook with
-              title = ""
-              author = "" }
+    |> getOrElse Book.defaultBook
 
 let bk2 = Book.setBorrower (Some(br2)) bk1
 
@@ -69,19 +66,13 @@ let ``A book should return a string "Title1 by Author1; Checked out to Borrower2
 [<Fact>]
 let ``A book without borrower should convert from JSON`` () =
     Book.jsonStringToBook jsonStringBk1
-    |> getOrElse
-        { Book.defaultBook with
-              title = ""
-              author = "" }
+    |> getOrElse Book.defaultBook
     |> should equal bk1
 
 [<Fact>]
 let ``A book with borrower should convert from JSON`` () =
     Book.jsonStringToBook jsonStringBk2
-    |> getOrElse
-        { Book.defaultBook with
-              title = ""
-              author = "" }
+    |> getOrElse Book.defaultBook
     |> should equal bk2
 
 [<Fact>]
