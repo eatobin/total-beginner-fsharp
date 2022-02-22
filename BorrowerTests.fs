@@ -3,16 +3,16 @@ module total.BorrowerTests
 open Xunit
 open FsUnit.Xunit
 
-let jsonStringBr : Borrower.JsonString =
+let jsonStringBr: Borrower.JsonString =
     "{\"name\":\"Borrower1\",\"maxBooks\":1}"
 
-let wonkyBr : Borrower.JsonString =
+let wonkyBr: Borrower.JsonString =
     "{\"wonky\":\"Borrower1\",\"maxBooks\":1}"
 
-let br1 : Result<Borrower.Borrower, string> =
+let br1: Result<Borrower.Borrower, string> =
     Borrower.jsonStringToBorrower jsonStringBr
 
-let brWonky : Result<Borrower.Borrower, string> = Borrower.jsonStringToBorrower wonkyBr
+let brWonky: Result<Borrower.Borrower, string> = Borrower.jsonStringToBorrower wonkyBr
 
 [<Fact>]
 let ``getName test - br1`` () =
