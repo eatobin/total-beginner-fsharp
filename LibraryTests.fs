@@ -3,6 +3,9 @@ module total.LibraryTests
 open Xunit
 open FsUnit.Xunit
 
+open Borrower
+open Book
+
 let br1 =
     { Borrower.name = "Borrower1"
       Borrower.maxBooks = 1 }
@@ -37,17 +40,17 @@ let bk4 =
     { Book.title = "Title4"
       Book.author = "Author4"
       Book.borrower =
-          Some
-              { Borrower.name = "Borrower3"
-                Borrower.maxBooks = 3 } }
+        Some
+            { Borrower.name = "Borrower3"
+              Borrower.maxBooks = 3 } }
 
 let bk5 =
     { Book.title = "Title2"
       Book.author = "Author2"
       Book.borrower =
-          Some
-              { Borrower.name = "Borrower2"
-                Borrower.maxBooks = 2 } }
+        Some
+            { Borrower.name = "Borrower2"
+              Borrower.maxBooks = 2 } }
 
 let bks1 = [ bk1; bk2 ]
 let bks2 = [ bk3; bk1; bk2 ]
@@ -79,24 +82,24 @@ let ``A Library should remove a Book correctly - 2`` () =
 
 [<Fact>]
 let ``A Library should find a Book or Borrower correctly - 1`` () =
-    Library.findItem "Title1" bks2 Book.getTitle
+    Library.findItem "Title1" bks2 getTitle
     |> Option.get
     |> should equal bk1
 
 [<Fact>]
 let ``A Library should find a Book or Borrower correctly - 2`` () =
-    Library.findItem "Title11" bks2 Book.getTitle
+    Library.findItem "Title11" bks2 getTitle
     |> should equal None
 
 [<Fact>]
 let ``A Library should find a Book or Borrower correctly - 3`` () =
-    Library.findItem "Borrower1" brs2 Borrower.getName
+    Library.findItem "Borrower1" brs2 getName
     |> Option.get
     |> should equal br1
 
 [<Fact>]
 let ``A Library should find a Book or Borrower correctly - 4`` () =
-    Library.findItem "Borrower11" brs2 Borrower.getName
+    Library.findItem "Borrower11" brs2 getName
     |> should equal None
 
 [<Fact>]

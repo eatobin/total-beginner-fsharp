@@ -1,9 +1,11 @@
 module total.Book
 
+open Borrower
+
 type Book =
     { title: string
       author: string
-      borrower: Borrower.Borrower option }
+      borrower: Borrower option }
 
 let defaultBook =
     { title = ""
@@ -20,7 +22,7 @@ let setBorrower br bk = { bk with borrower = br }
 
 let private availableString bk =
     match (getBorrower bk) with
-    | Some br -> $"Checked out to %s{Borrower.getName br}"
+    | Some br -> $"Checked out to %s{getName br}"
     | None -> "Available"
 
 let toString bk =

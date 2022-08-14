@@ -1,5 +1,8 @@
 module total.Library
 
+open Borrower
+open Book
+
 let addItem x xs =
     if List.contains x xs then
         xs
@@ -18,21 +21,20 @@ let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
         Some(res.Head)
 
 let getBooksForBorrower (br: Borrower.Borrower) (bks: Book.Book list) : Book.Book list =
-    List.filter (fun bk -> Option.contains br (Book.getBorrower bk)) bks
+    List.filter (fun bk -> Option.contains br (getBorrower bk)) bks
 
 let numBooksOut br bks =
     getBooksForBorrower br bks |> List.length
 
-let notMaxedOut br bks =
-    numBooksOut br bks < Borrower.getMaxBooks br
+let notMaxedOut br bks = numBooksOut br bks < getMaxBooks br
 
-let bookNotOut bk = Book.getBorrower bk |> Option.isNone
+let bookNotOut bk = getBorrower bk |> Option.isNone
 
-let bookOut bk = Book.getBorrower bk |> Option.isSome
+let bookOut bk = getBorrower bk |> Option.isSome
 
 let checkOut (n: string) (t: string) (brs: Borrower.Borrower list) (bks: Book.Book list) : Book.Book list =
-    let mbk = findItem t bks Book.getTitle
-    let mbr = findItem n brs Borrower.getName
+    let mbk = findItem t bks getTitle
+    let mbr = findItem n brs getName
 
     if
         mbk |> Option.isSome
@@ -40,23 +42,29 @@ let checkOut (n: string) (t: string) (brs: Borrower.Borrower list) (bks: Book.Bo
         && notMaxedOut (mbr |> Option.get) bks
         && bookNotOut (mbk |> Option.get)
     then
-        let newBook = Book.setBorrower mbr (mbk |> Option.get)
-        let fewerBooks = removeBook (mbk |> Option.get) bks
+        let newBook =
+            setBorrower mbr (mbk |> Option.get)
+
+        let fewerBooks =
+            removeBook (mbk |> Option.get) bks
+
         addItem newBook fewerBooks
     else
         bks
 
 let checkIn (t: string) (bks: Book.Book list) : Book.Book list =
-    let mbk = findItem t bks Book.getTitle
+    let mbk = findItem t bks getTitle
 
     if
         mbk |> Option.isSome
         && bookOut (mbk |> Option.get)
     then
         let newBook =
-            Book.setBorrower None (mbk |> Option.get)
+            setBorrower None (mbk |> Option.get)
 
-        let fewerBooks = removeBook (mbk |> Option.get) bks
+        let fewerBooks =
+            removeBook (mbk |> Option.get) bks
+
         addItem newBook fewerBooks
     else
         bks
