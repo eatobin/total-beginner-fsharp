@@ -5,7 +5,7 @@ open FsUnit.Xunit
 
 open Borrower
 
-let br1: Borrower.Borrower =
+let br1: Borrower =
     { Borrower.name = "Borrower1"
       Borrower.maxBooks = 1 }
 

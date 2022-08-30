@@ -6,11 +6,11 @@ open FsUnit.Xunit
 open Borrower
 open Book
 
-let br2: Borrower.Borrower =
+let br2: Borrower =
     { Borrower.name = "Borrower2"
       Borrower.maxBooks = 2 }
 
-let bk1: Book.Book =
+let bk1: Book =
     { Book.title = "Title1"
       Book.author = "Author1"
       Book.borrower = None }

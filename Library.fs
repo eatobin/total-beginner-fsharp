@@ -20,7 +20,7 @@ let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
     else
         Some(res.Head)
 
-let getBooksForBorrower (br: Borrower.Borrower) (bks: Book.Book list) : Book.Book list =
+let getBooksForBorrower (br: Borrower) (bks: Book list) : Book list =
     List.filter (fun bk -> Option.contains br (getBorrower bk)) bks
 
 let numBooksOut br bks =
@@ -32,7 +32,7 @@ let bookNotOut bk = getBorrower bk |> Option.isNone
 
 let bookOut bk = getBorrower bk |> Option.isSome
 
-let checkOut (n: string) (t: string) (brs: Borrower.Borrower list) (bks: Book.Book list) : Book.Book list =
+let checkOut (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Book list =
     let mbk = findItem t bks getTitle
     let mbr = findItem n brs getName
 
@@ -52,7 +52,7 @@ let checkOut (n: string) (t: string) (brs: Borrower.Borrower list) (bks: Book.Bo
     else
         bks
 
-let checkIn (t: string) (bks: Book.Book list) : Book.Book list =
+let checkIn (t: string) (bks: Book list) : Book list =
     let mbk = findItem t bks getTitle
 
     if

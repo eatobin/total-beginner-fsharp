@@ -9,20 +9,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Borrower.fs"/>
-        <Compile Include="BorrowerTests.fs"/>
-        <Compile Include="Book.fs"/>
-        <Compile Include="BookTests.fs"/>
-        <Compile Include="Library.fs"/>
-        <Compile Include="LibraryTests.fs"/>
-        <Compile Include="Program.fs"/>
+        <Compile Include="Borrower.fs" />
+        <Compile Include="BorrowerTests.fs" />
+        <Compile Include="Book.fs" />
+        <Compile Include="BookTests.fs" />
+        <Compile Include="Library.fs" />
+        <Compile Include="LibraryTests.fs" />
+        <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FSharp.Json" Version="0.4.1"/>
-        <PackageReference Include="FsUnit.xUnit" Version="5.0.3"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0"/>
-        <PackageReference Include="xunit" Version="2.4.2"/>
+        <PackageReference Include="FSharp.Json" Version="0.4.1" />
+        <PackageReference Include="FsUnit.xUnit" Version="5.0.3" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
+        <PackageReference Include="xunit" Version="2.4.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
