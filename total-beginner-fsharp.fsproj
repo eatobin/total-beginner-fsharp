@@ -17,6 +17,7 @@
         <Compile Include="LibraryTests.fs" />
         <Compile Include="Program.fs" />
         <None Include="Json.fsx" />
+        <Content Include="tester.csv" />
     </ItemGroup>
 
     <ItemGroup>
