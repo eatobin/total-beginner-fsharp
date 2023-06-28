@@ -4,21 +4,14 @@ open Borrower
 open Book
 
 let addItem x xs =
-    if List.contains x xs then
-        xs
-    else
-        x :: xs
+    if List.contains x xs then xs else x :: xs
 
 let removeBook bk bks = List.filter (fun b -> b <> bk) bks
 
 let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
-    let res =
-        List.filter (fun item -> f item = tgt) coll
+    let res = List.filter (fun item -> f item = tgt) coll
 
-    if res.IsEmpty then
-        None
-    else
-        Some(res.Head)
+    if res.IsEmpty then None else Some(res.Head)
 
 let getBooksForBorrower (br: Borrower) (bks: Book list) : Book list =
     List.filter (fun bk -> Option.contains br (getBorrower bk)) bks
@@ -42,11 +35,9 @@ let checkOut (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Boo
         && notMaxedOut (mbr |> Option.get) bks
         && bookNotOut (mbk |> Option.get)
     then
-        let newBook =
-            setBorrower mbr (mbk |> Option.get)
+        let newBook = setBorrower mbr (mbk |> Option.get)
 
-        let fewerBooks =
-            removeBook (mbk |> Option.get) bks
+        let fewerBooks = removeBook (mbk |> Option.get) bks
 
         addItem newBook fewerBooks
     else
@@ -55,15 +46,10 @@ let checkOut (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Boo
 let checkIn (t: string) (bks: Book list) : Book list =
     let mbk = findItem t bks getTitle
 
-    if
-        mbk |> Option.isSome
-        && bookOut (mbk |> Option.get)
-    then
-        let newBook =
-            setBorrower None (mbk |> Option.get)
+    if mbk |> Option.isSome && bookOut (mbk |> Option.get) then
+        let newBook = setBorrower None (mbk |> Option.get)
 
-        let fewerBooks =
-            removeBook (mbk |> Option.get) bks
+        let fewerBooks = removeBook (mbk |> Option.get) bks
 
         addItem newBook fewerBooks
     else
