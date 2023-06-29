@@ -36,9 +36,7 @@ let checkOut (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Boo
         && bookNotOut (mbk |> Option.get)
     then
         let newBook = setBorrower mbr (mbk |> Option.get)
-
         let fewerBooks = removeBook (mbk |> Option.get) bks
-
         addItem newBook fewerBooks
     else
         bks
@@ -48,9 +46,7 @@ let checkIn (t: string) (bks: Book list) : Book list =
 
     if mbk |> Option.isSome && bookOut (mbk |> Option.get) then
         let newBook = setBorrower None (mbk |> Option.get)
-
         let fewerBooks = removeBook (mbk |> Option.get) bks
-
         addItem newBook fewerBooks
     else
         bks
