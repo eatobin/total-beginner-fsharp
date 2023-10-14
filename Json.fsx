@@ -1,3 +1,5 @@
+// https://github.com/fsprojects/FSharp.Json
+
 #r "nuget: FSharp.Json"
 
 open System
