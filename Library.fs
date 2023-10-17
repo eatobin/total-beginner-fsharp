@@ -1,42 +1,34 @@
 module total.Library
 
-type BorrowerData = { name: string; maxBooks: int }
-type BookData = { title: string; author: string }
-type BookIn = BookData
-type BookOut = (BookData * BorrowerData)
+type Borrower = { name: string; maxBooks: int }
 
-// type BookStatus =
-//     | BookIn of Book
-//     | BookOut of (Book * Borrower)
-
-let getName (br: Borrower) : string = br.name
+type Book =
+    | BookIn of title: string * author: string
+    | BookOut of title: string * author: string * borrower: Borrower
 
 let setName (n: string) (br: Borrower) : Borrower = { br with name = n }
 
-let getMaxBooks (br: Borrower) : int = br.maxBooks
-
 let setMaxBooks (mb: int) (br: Borrower) : Borrower = { br with maxBooks = mb }
 
-let toString (br: Borrower) : string =
-    $"%s{getName br} (%i{getMaxBooks br} books)"
+let borrowerToString (br: Borrower) : string = $"%s{br.name} (%d{br.maxBooks} books)"
 
-let getTitle (bk: Book) : String = bk.title
+let getBorrower (bkOut: Book) : Borrower =
+    match bkOut with
+    | BookOut(_, _, br) -> br
+    | bookIn -> failwithf $"%A{bookIn} has no borrower"
 
-let getAuthor (bk: Book) : String = bk.author
+let setBorrower (br: Borrower) (bkIn: Book) : Book =
+    match bkIn with
+    | BookIn(t, a) -> BookOut(title = t, author = a, borrower = br)
+    | bookOut -> failwithf $"%A{bookOut} already has a borrower"
 
-let getBorrower (bkO: BookOut) : Borrower =
-    let (_, br) = br
-    br
-
-let setBorrower br bk = { bk with borrower = br }
-
-let private availableString bk =
-    match (getBorrower bk) with
-    | Some br -> $"Checked out to %s{getName br}"
-    | None -> "Available"
-
-let toString bk =
-    $"%s{getTitle bk} by %s{getAuthor bk}; %s{availableString bk}"
+// let private availableString bk =
+//     match (getBorrower bk) with
+//     | Some br -> $"Checked out to %s{getName br}"
+//     | None -> "Available"
+//
+// let toString bk =
+//     $"%s{getTitle bk} by %s{getAuthor bk}; %s{availableString bk}"
 
 
 
