@@ -9,17 +9,13 @@ type BookOut =
       author: string
       borrower: Borrower }
 
-type Book bkIn bkOut =
-    | BookIn bkIn of BookIn
-    | BookOut bkOut of BookOut
-
 let createBorrower (nameP: string) (maxBooksP: int) : Borrower = { name = nameP; maxBooks = maxBooksP }
 
 let createBook (titleP: string) (authorP: string) : BookIn = { title = titleP; author = authorP }
 
 let borrowerToString (br: Borrower) : string = $"%s{br.name} (%d{br.maxBooks} books)"
 
-let checkOutBook (br: Borrower) (bkIn: BookIn) : BookOut =
+let checkOutBookIn (br: Borrower) (bkIn: BookIn) : BookOut =
     { title = bkIn.title
       author = bkIn.author
       borrower = br }
@@ -34,7 +30,11 @@ let bookInToString (bkIn: BookIn) : string =
 
 
 
-
+// let bookToString (bk: Book) : string =
+//     match bk with
+//     | BookOut bkOut -> $"%s{bkOut.title} by %s{bkOut.author}; Checked out to %s{bkOut.borrower.name}"
+//     | BookIn bkIn -> $"%s{bkIn.title} by %s{bkIn.author}; Available"
+//
 // let addItem x xs =
 //     if List.contains x xs then xs else x :: xs
 //
