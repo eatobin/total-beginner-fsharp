@@ -9,63 +9,22 @@ type BookOut =
       author: string
       borrower: Borrower }
 
-type Book =
-    | BookIn of BookIn
-    | BookOut of BookOut
+let createBorrower (nameP: string) (maxBooksP: int) : Borrower = { name = nameP; maxBooks = maxBooksP }
 
-let setName (n: string) (br: Borrower) : Borrower = { br with name = n }
-
-let setMaxBooks (mb: int) (br: Borrower) : Borrower = { br with maxBooks = mb }
+let createBook (titleP: string) (authorP: string) : BookIn = { title = titleP; author = authorP }
 
 let borrowerToString (br: Borrower) : string = $"%s{br.name} (%d{br.maxBooks} books)"
 
-let setBorrower (br: Borrower) (bkIn: BookIn) : BookOut =
+let checkOutBook (br: Borrower) (bkIn: BookIn) : BookOut =
     { title = bkIn.title
       author = bkIn.author
       borrower = br }
 
-let private availableString (bk: Book) : string =
-    match bk with
-    | BookOut bkOut -> $"Checked out to %s{bkOut.borrower.name}"
-    | BookIn _ -> "Available"
+let bookOutToString (bkOut: BookOut) : string =
+    $"%s{bkOut.title} by %s{bkOut.author}; Checked out to %s{bkOut.borrower.name}"
 
-let bookToString (bk: Book) : string =
-    match bk with
-    | BookOut bkOut -> $"%s{bkOut.title} by %s{bkOut.author}; Checked out to %s{bkOut.borrower.name}"
-    | BookIn bkIn -> $"%s{bkIn.title} by %s{bkIn.author}; Available"
-
-// $"%s{getTitle bk} by %s{getAuthor bk}; %s{availableString bk}"
-// $"Checked out to %s{bkOut.borrower.name}"
-
-// $"%s{bk} by %s{getAuthor bk}; %s{availableString bk}"
-
-// type Book =
-//     | BookIn of title: string * author: string
-//     | BookOut of title: string * author: string * borrower: Borrower
-//
-// let setName (n: string) (br: Borrower) : Borrower = { br with name = n }
-//
-// let setMaxBooks (mb: int) (br: Borrower) : Borrower = { br with maxBooks = mb }
-//
-// let borrowerToString (br: Borrower) : string = $"%s{br.name} (%d{br.maxBooks} books)"
-//
-// let getBorrower (bkOut: Book) : Borrower =
-//     match bkOut with
-//     | BookOut(_, _, br) -> br
-//     | bookIn -> failwithf $"%A{bookIn} has no borrower"
-//
-// let setBorrower (br: Borrower) (bkIn: Book) : Book =
-//     match bkIn with
-//     | BookIn(t, a) -> BookOut(title = t, author = a, borrower = br)
-//     | bookOut -> failwithf $"%A{bookOut} already has a borrower"
-
-// let private availableString bk =
-//     match (getBorrower bk) with
-//     | Some br -> $"Checked out to %s{getName br}"
-//     | None -> "Available"
-//
-// let toString bk =
-//     $"%s{getTitle bk} by %s{getAuthor bk}; %s{availableString bk}"
+let bookInToString (bkIn: BookIn) : string =
+    $"%s{bkIn.title} by %s{bkIn.author}; Available"
 
 
 
