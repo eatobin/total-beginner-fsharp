@@ -11,11 +11,11 @@ type BookOut =
 
 let createBorrower (nameP: string) (maxBooksP: int) : Borrower = { name = nameP; maxBooks = maxBooksP }
 
-let createBook (titleP: string) (authorP: string) : BookIn = { title = titleP; author = authorP }
+let createBookIn (titleP: string) (authorP: string) : BookIn = { title = titleP; author = authorP }
 
 let borrowerToString (br: Borrower) : string = $"%s{br.name} (%d{br.maxBooks} books)"
 
-let checkOutBookIn (br: Borrower) (bkIn: BookIn) : BookOut =
+let checkOutBook (br: Borrower) (bkIn: BookIn) : BookOut =
     { title = bkIn.title
       author = bkIn.author
       borrower = br }
