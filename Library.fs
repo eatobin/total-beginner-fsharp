@@ -9,9 +9,9 @@ type BookOut =
       author: string
       borrower: Borrower }
 
-let booksOut: BookOut list = []
-
-let booksIn: BookIn list = []
+// let booksOut: BookOut list = []
+//
+// let booksIn: BookIn list = []
 
 let createBorrower (nameP: string) (maxBooksP: int) : Borrower = { name = nameP; maxBooks = maxBooksP }
 
