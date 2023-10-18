@@ -9,10 +9,6 @@ type BookOut =
       author: string
       borrower: Borrower }
 
-// let booksOut: BookOut list = []
-//
-// let booksIn: BookIn list = []
-
 let createBorrower (nameP: string) (maxBooksP: int) : Borrower = { name = nameP; maxBooks = maxBooksP }
 
 let createBookIn (titleP: string) (authorP: string) : BookIn = { title = titleP; author = authorP }
@@ -24,6 +20,10 @@ let addBorrowerToBookIn (br: Borrower) (bkIn: BookIn) : BookOut =
       author = bkIn.author
       borrower = br }
 
+let removeBorrowerFromBookOut (bkOut: BookOut) : BookIn =
+    { title = bkOut.title
+      author = bkOut.author }
+
 let bookOutToString (bkOut: BookOut) : string =
     $"%s{bkOut.title} by %s{bkOut.author}; Checked out to %s{bkOut.borrower.name}"
 
@@ -31,20 +31,11 @@ let bookInToString (bkIn: BookIn) : string =
     $"%s{bkIn.title} by %s{bkIn.author}; Available"
 
 let getName (br: Borrower) : string = br.name
+
 let getTitleBookIn (bkIn: BookIn) : string = bkIn.title
+
 let getTitleBookOut (bkOut: BookOut) : string = bkOut.title
 
-
-// let bookToString (bk: Book) : string =
-//     match bk with
-//     | BookOut bkOut -> $"%s{bkOut.title} by %s{bkOut.author}; Checked out to %s{bkOut.borrower.name}"
-//     | BookIn bkIn -> $"%s{bkIn.title} by %s{bkIn.author}; Available"
-//
-// let addItem x xs =
-//     if List.contains x xs then xs else x :: xs
-//
-// let removeBook bk bks = List.filter (fun b -> b <> bk) bks
-//
 let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
     let res = List.filter (fun item -> f item = tgt) coll
     if res.IsEmpty then None else Some(res.Head)
@@ -80,13 +71,25 @@ let checkOutBookIn
         newBookOut :: bksOut
     else
         bksOut
-//
-// let checkIn (t: string) (bks: Book list) : Book list =
-//     let mbk = findItem t bks getTitle
-//
-//     if mbk |> Option.isSome && bookOut (mbk |> Option.get) then
-//         let newBook = setBorrower None (mbk |> Option.get)
-//         let fewerBooks = removeBook (mbk |> Option.get) bks
-//         addItem newBook fewerBooks
-//     else
-//         bks
+
+let checkInBookOut
+    (n: string)
+    (t: string)
+    (brs: Borrower list)
+    (bksIn: BookIn list)
+    (bksOut: BookOut list)
+    : BookIn list =
+    let maybeBookIn = findItem t bksIn getTitleBookIn
+    let maybeBookOut = findItem t bksOut getTitleBookOut
+    let maybeBorrower = findItem n brs getName
+
+    if
+        maybeBookIn |> Option.isNone
+        && maybeBookOut |> Option.isSome
+        && maybeBorrower |> Option.isSome
+    then
+        let newBookIn = removeBorrowerFromBookOut (maybeBookOut |> Option.get)
+
+        newBookIn :: bksIn
+    else
+        bksIn
