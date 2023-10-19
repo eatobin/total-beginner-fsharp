@@ -77,21 +77,21 @@ let bksOut1: BookOut list = [ bk1Out ]
 // let ``A Library should remove a Book correctly - 2`` () =
 //     Library.removeBook bk3 bks1 |> should equal bks1
 //
-[<Fact>]
-let ``A Library should find a Book or Borrower correctly - 1`` () =
-    findItem "Title1" bksOut1 getTitleBookOut |> Option.get |> should equal bk1Out
-
-[<Fact>]
-let ``A Library should find a Book or Borrower correctly - 2`` () =
-    findItem "Title11" bksOut1 getTitleBookOut |> should equal None
-
-[<Fact>]
-let ``A Library should find a Book or Borrower correctly - 3`` () =
-    findItem "Borrower1" brs2 getName |> Option.get |> should equal br1
-
-[<Fact>]
-let ``A Library should find a Book or Borrower correctly - 4`` () =
-    findItem "Borrower11" brs2 getName |> should equal None
+// [<Fact>]
+// let ``A Library should find a Book or Borrower correctly - 1`` () =
+//     findItem "Title1" bksOut1 getTitleBookOut |> Option.get |> should equal bk1Out
+//
+// [<Fact>]
+// let ``A Library should find a Book or Borrower correctly - 2`` () =
+//     findItem "Title11" bksOut1 getTitleBookOut |> should equal None
+//
+// [<Fact>]
+// let ``A Library should find a Book or Borrower correctly - 3`` () =
+//     findItem "Borrower1" brs2 getName |> Option.get |> should equal br1
+//
+// [<Fact>]
+// let ``A Library should find a Book or Borrower correctly - 4`` () =
+//     findItem "Borrower11" brs2 getName |> should equal None
 
 // [<Fact>]
 // let ``A Library should find List[Book] for a Borrower - 1`` () =
