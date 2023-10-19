@@ -9,6 +9,11 @@ type BookOut =
       author: string
       borrower: Borrower }
 
+[<RequireQualifiedAccess>]
+type Book =
+    | BookIn of BookIn
+    | BookOut of BookOut
+
 let createBorrower (nameP: string) (maxBooksP: int) : Borrower = { name = nameP; maxBooks = maxBooksP }
 
 let createBookIn (titleP: string) (authorP: string) : BookIn = { title = titleP; author = authorP }
@@ -24,11 +29,10 @@ let removeBorrowerFromBookOut (bkOut: BookOut) : BookIn =
     { title = bkOut.title
       author = bkOut.author }
 
-let bookOutToString (bkOut: BookOut) : string =
-    $"%s{bkOut.title} by %s{bkOut.author}; Checked out to %s{bkOut.borrower.name}"
-
-let bookInToString (bkIn: BookIn) : string =
-    $"%s{bkIn.title} by %s{bkIn.author}; Available"
+let bookToString (bk: Book) : string =
+    match bk with
+    | Book.BookOut bkOut -> $"%s{bkOut.title} by %s{bkOut.author}; Checked out to %s{bkOut.borrower.name}"
+    | Book.BookIn bkIn -> $"%s{bkIn.title} by %s{bkIn.author}; Available"
 
 let getName (br: Borrower) : string = br.name
 
