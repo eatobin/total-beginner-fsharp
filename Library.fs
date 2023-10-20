@@ -71,10 +71,14 @@ let bk2Out: BookOut =
 let bk1: Book = Book.BookIn bk1In
 let bk2: Book = Book.BookOut bk2Out
 
+let bookFromBookIn (bkIn: BookIn): Book =
+    Book.BookIn bkIn
+
+let bookFromBookOut (bkOut: BookOut): Book =
+    Book.BookOut bkOut
+
 let bks: Book list = [ bk1; bk2 ]
 
-// let makeBooksInList (bks: Book list): BookIn list =
-//     List.filter (fun bk -> bk = BookIn)
 let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
     let res = List.filter (fun item -> f item = tgt) coll
     if res.IsEmpty then None else Some(res.Head)
