@@ -41,14 +41,14 @@ let getTitleBook (bk: Book) : string =
     | Book.BookIn bkIn -> bkIn.title
     | Book.BookOut bkOut -> bkOut.title
 
-let makeBooksInList (bks: Book list) =
+let makeBooksInList (bks: Book list) : BookIn list =
     bks
     |> List.choose (fun bk ->
         match bk with
         | Book.BookIn bkIn -> Some bkIn
         | Book.BookOut _ -> None)
 
-let makeBooksOutList (bks: Book list) =
+let makeBooksOutList (bks: Book list) : BookOut list =
     bks
     |> List.choose (fun bk ->
         match bk with
