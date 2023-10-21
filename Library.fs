@@ -80,7 +80,7 @@ let numBooksOut br bksOut =
 
 let notMaxedOut br bksOut = numBooksOut br bksOut < br.maxBooks
 
-
+let removeBook (bk: Book) (bks: Book list) : Book list = List.filter (fun b -> b <> bk) bks
 
 let br1: Borrower =
     { Borrower.name = "Borrower1"
@@ -106,19 +106,20 @@ let maybeBorrowerPass: Borrower option = findItem "Borrower1" brs getName
 let maybeBorrowerFail: Borrower option = findItem "Nope" brs getName
 let maybeBookPass: Book option = findItem "Title1" newBks getTitleBook
 let maybeBookFail: Book option = findItem "Nope" newBks getTitleBook
+let fewerBk1: Book list = removeBook bk1 newBks
+let fewerBk2: Book list = removeBook bk2 newBks
 
 
 
 
 
 
-
-// let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : BookOut list =
-//     let bksIn: BookIn list = makeBookInList bks
-//     let bksOut: BookOut list = makeBookOutList bks
-//     let maybeBookIn: BookIn option = findItem t bksIn getTitleBookIn
-//     let maybeBookOut: BookOut option = findItem t bksOut getTitleBookOut
-//     let maybeBorrower: Borrower option = findItem n brs getName
+// let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Book list =
+// //     let bksIn: BookIn list = makeBookInList bks
+// //     let bksOut: BookOut list = makeBookOutList bks
+//      let maybeBook: BookIn option = findItem t bks getTitleBook
+// //     let maybeBookOut: BookOut option = findItem t bksOut getTitleBookOut
+//      let maybeBorrower: Borrower option = findItem n brs getName
 //
 //     if
 //         maybeBookIn |> Option.isSome
