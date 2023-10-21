@@ -68,10 +68,6 @@ let makeBookList (bksIn: BookIn list) (bksOut: BookOut list) : Book list =
     let bksFromOut: Book list = List.map bookFromBookOut bksOut
     List.append bksFromIn bksFromOut
 
-// let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
-//     let res = List.filter (fun item -> f item = tgt) coll
-//     List.tryHead res
-
 let findBorrower (name: string) (brs: Borrower list) : Borrower option =
     brs |> List.filter (fun br -> getName br = name) |> List.tryHead
 
@@ -103,23 +99,51 @@ let notMaxedOut br bksOut = numBooksOut br bksOut < br.maxBooks
 
 let removeBook (bk: Book) (bks: Book list) : Book list = List.filter (fun b -> b <> bk) bks
 
+let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Book list =
+    let maybeBookIn: BookIn option = findBookIn t bks
+    let maybeBookOut: BookOut option = findBookOut t bks
+    let maybeBorrower: Borrower option = findBorrower n brs
+    let bksOut: BookOut list = makeBookOutList bks
+
+    if
+        maybeBookIn |> Option.isSome
+        && maybeBookOut |> Option.isNone
+        && maybeBorrower |> Option.isSome
+        && notMaxedOut (maybeBorrower |> Option.get) bksOut
+    then
+        let newBook: Book =
+            addBorrowerToBookIn (maybeBorrower |> Option.get) (maybeBookIn |> Option.get)
+            |> bookFromBookOut
+
+        let oldBook: Book = maybeBookIn |> Option.get |> bookFromBookIn
+        let fewerBooks: Book list = removeBook oldBook bks
+        newBook :: fewerBooks
+    else
+        bks
+
 let br1: Borrower =
     { Borrower.name = "Borrower1"
-      Borrower.maxBooks = 1 }
+      Borrower.maxBooks = 11 }
 
 let bk1In: BookIn =
-    { BookIn.title = "Title1"
-      BookIn.author = "Author1" }
+    { BookIn.title = "Title1In"
+      BookIn.author = "Author1In" }
+
+let bk2In: BookIn =
+    { BookIn.title = "Title2In"
+      BookIn.author = "Author2In" }
 
 let bk2Out: BookOut =
-    { BookOut.title = "Title2"
-      BookOut.author = "Author2"
+    { BookOut.title = "Title2Out"
+      BookOut.author = "Author2Out"
       BookOut.borrower = br1 }
 
 let bk1: Book = bookFromBookIn bk1In
 let bk2: Book = bookFromBookOut bk2Out
+let bk3: Book = bookFromBookIn bk2In
 let brs: Borrower list = [ br1 ]
 let bks: Book list = [ bk1; bk2 ]
+let bks2: Book list = [ bk3 ]
 let bksIn: BookIn list = makeBookInList bks
 let bksOut: BookOut list = makeBookOutList bks
 let newBks: Book list = makeBookList bksIn bksOut
@@ -133,31 +157,13 @@ let maybeBookOutFailIsIn: BookOut option = findBookOut "Title1" newBks
 let maybeBookOutFailIsNone: BookOut option = findBookOut "Nope" newBks
 let fewerBk1: Book list = removeBook bk1 newBks
 let fewerBk2: Book list = removeBook bk2 newBks
+let bk2InCheckedOut: Book list = checkOutBookIn "Borrower1" "Title2In" brs bks2
 
 
 
 
 
 
-// let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Book list =
-// //     let bksIn: BookIn list = makeBookInList bks
-// //     let bksOut: BookOut list = makeBookOutList bks
-//      let maybeBook: BookIn option = findItem t bks getTitleBook
-// //     let maybeBookOut: BookOut option = findItem t bksOut getTitleBookOut
-//      let maybeBorrower: Borrower option = findItem n brs getName
-//
-//     if
-//         maybeBookIn |> Option.isSome
-//         && maybeBookOut |> Option.isNone
-//         && maybeBorrower |> Option.isSome
-//         && notMaxedOut (maybeBorrower |> Option.get) bksOut
-//     then
-//         let newBookOut =
-//             addBorrowerToBookIn (maybeBorrower |> Option.get) (maybeBookIn |> Option.get)
-//
-//         newBookOut :: bksOut
-//     else
-//         bksOut
 
 // let checkInBookOut
 //     (n: string)
