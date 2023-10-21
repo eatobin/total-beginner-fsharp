@@ -68,9 +68,30 @@ let makeBookList (bksIn: BookIn list) (bksOut: BookOut list) : Book list =
     let bksFromOut: Book list = List.map bookFromBookOut bksOut
     List.append bksFromIn bksFromOut
 
-let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
-    let res = List.filter (fun item -> f item = tgt) coll
-    List.tryHead res
+// let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
+//     let res = List.filter (fun item -> f item = tgt) coll
+//     List.tryHead res
+
+let findBorrower (name: string) (brs: Borrower list) : Borrower option =
+    brs |> List.filter (fun br -> getName br = name) |> List.tryHead
+
+let findBookIn (title: string) (bks: Book list) : BookIn option =
+    bks
+    |> List.filter (fun bk -> getTitleBook bk = title)
+    |> List.choose (fun bk ->
+        match bk with
+        | Book.BookIn bkIn -> Some bkIn
+        | Book.BookOut _ -> None)
+    |> List.tryHead
+
+let findBookOut (title: string) (bks: Book list) : BookOut option =
+    bks
+    |> List.filter (fun bk -> getTitleBook bk = title)
+    |> List.choose (fun bk ->
+        match bk with
+        | Book.BookIn _ -> None
+        | Book.BookOut bkOut -> Some bkOut)
+    |> List.tryHead
 
 let getBooksOutForBorrower (br: Borrower) (bksOut: BookOut list) : BookOut list =
     List.filter (fun bkOut -> bkOut.borrower = br) bksOut
@@ -91,8 +112,8 @@ let bk1In: BookIn =
       BookIn.author = "Author1" }
 
 let bk2Out: BookOut =
-    { BookOut.title = "Title1"
-      BookOut.author = "Author1"
+    { BookOut.title = "Title2"
+      BookOut.author = "Author2"
       BookOut.borrower = br1 }
 
 let bk1: Book = bookFromBookIn bk1In
@@ -102,10 +123,14 @@ let bks: Book list = [ bk1; bk2 ]
 let bksIn: BookIn list = makeBookInList bks
 let bksOut: BookOut list = makeBookOutList bks
 let newBks: Book list = makeBookList bksIn bksOut
-let maybeBorrowerPass: Borrower option = findItem "Borrower1" brs getName
-let maybeBorrowerFail: Borrower option = findItem "Nope" brs getName
-let maybeBookPass: Book option = findItem "Title1" newBks getTitleBook
-let maybeBookFail: Book option = findItem "Nope" newBks getTitleBook
+let maybeBorrowerPass: Borrower option = findBorrower "Borrower1" brs
+let maybeBorrowerFail: Borrower option = findBorrower "Nope" brs
+let maybeBookInPass: BookIn option = findBookIn "Title1" newBks
+let maybeBookInFailIsOut: BookIn option = findBookIn "Title2" newBks
+let maybeBookInFailIsNone: BookIn option = findBookIn "Nope" newBks
+let maybeBookOutPass: BookOut option = findBookOut "Title2" newBks
+let maybeBookOutFailIsIn: BookOut option = findBookOut "Title1" newBks
+let maybeBookOutFailIsNone: BookOut option = findBookOut "Nope" newBks
 let fewerBk1: Book list = removeBook bk1 newBks
 let fewerBk2: Book list = removeBook bk2 newBks
 
