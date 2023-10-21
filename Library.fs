@@ -68,6 +68,20 @@ let makeBookList (bksIn: BookIn list) (bksOut: BookOut list) : Book list =
     let bksFromOut: Book list = List.map bookFromBookOut bksOut
     List.append bksFromIn bksFromOut
 
+let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
+    let res = List.filter (fun item -> f item = tgt) coll
+    List.tryHead res
+
+let getBooksOutForBorrower (br: Borrower) (bksOut: BookOut list) : BookOut list =
+    List.filter (fun bkOut -> bkOut.borrower = br) bksOut
+
+let numBooksOut br bksOut =
+    getBooksOutForBorrower br bksOut |> List.length
+
+let notMaxedOut br bksOut = numBooksOut br bksOut < br.maxBooks
+
+
+
 let br1: Borrower =
     { Borrower.name = "Borrower1"
       Borrower.maxBooks = 1 }
@@ -83,22 +97,21 @@ let bk2Out: BookOut =
 
 let bk1: Book = bookFromBookIn bk1In
 let bk2: Book = bookFromBookOut bk2Out
+let brs: Borrower list = [ br1 ]
 let bks: Book list = [ bk1; bk2 ]
 let bksIn: BookIn list = makeBookInList bks
 let bksOut: BookOut list = makeBookOutList bks
 let newBks: Book list = makeBookList bksIn bksOut
+let maybeBorrowerPass: Borrower option = findItem "Borrower1" brs getName
+let maybeBorrowerFail: Borrower option = findItem "Nope" brs getName
+let maybeBookPass: Book option = findItem "Title1" newBks getTitleBook
+let maybeBookFail: Book option = findItem "Nope" newBks getTitleBook
 
-let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
-    let res = List.filter (fun item -> f item = tgt) coll
-    List.tryHead res
 
-let getBooksOutForBorrower (br: Borrower) (bksOut: BookOut list) : BookOut list =
-    List.filter (fun bkOut -> bkOut.borrower = br) bksOut
 
-let numBooksOut br bksOut =
-    getBooksOutForBorrower br bksOut |> List.length
 
-let notMaxedOut br bksOut = numBooksOut br bksOut < br.maxBooks
+
+
 
 // let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : BookOut list =
 //     let bksIn: BookIn list = makeBookInList bks
