@@ -36,6 +36,10 @@ let bookToString (bk: Book) : string =
 
 let getName (br: Borrower) : string = br.name
 
+let getTitleBookIn (bkIn: BookIn) : string = bkIn.title
+
+let getTitleBookOut (bkOut: BookOut) : string = bkOut.title
+
 let getTitleBook (bk: Book) : string =
     match bk with
     | Book.BookIn bkIn -> bkIn.title
@@ -71,11 +75,9 @@ let bk2Out: BookOut =
 let bk1: Book = Book.BookIn bk1In
 let bk2: Book = Book.BookOut bk2Out
 
-let bookFromBookIn (bkIn: BookIn): Book =
-    Book.BookIn bkIn
+let bookFromBookIn (bkIn: BookIn) : Book = Book.BookIn bkIn
 
-let bookFromBookOut (bkOut: BookOut): Book =
-    Book.BookOut bkOut
+let bookFromBookOut (bkOut: BookOut) : Book = Book.BookOut bkOut
 
 let bks: Book list = [ bk1; bk2 ]
 
@@ -91,16 +93,12 @@ let numBooksOut br bksOut =
 
 let notMaxedOut br bksOut = numBooksOut br bksOut < br.maxBooks
 
-// let checkOutBookIn
-//     (n: string)
-//     (t: string)
-//     (brs: Borrower list)
-//     (bksIn: BookIn list)
-//     (bksOut: BookOut list)
-//     : BookOut list =
-//     let maybeBookIn = findItem t bksIn getTitleBookIn
-//     let maybeBookOut = findItem t bksOut getTitleBookOut
-//     let maybeBorrower = findItem n brs getName
+// let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : BookOut list =
+//     let bksIn: BookIn list = makeBookInList bks
+//     let bksOut: BookOut list = makeBookOutList bks
+//     let maybeBookIn: BookIn option = findItem t bksIn getTitleBookIn
+//     let maybeBookOut: BookOut option = findItem t bksOut getTitleBookOut
+//     let maybeBorrower: Borrower option = findItem n brs getName
 //
 //     if
 //         maybeBookIn |> Option.isSome
@@ -114,7 +112,7 @@ let notMaxedOut br bksOut = numBooksOut br bksOut < br.maxBooks
 //         newBookOut :: bksOut
 //     else
 //         bksOut
-//
+
 // let checkInBookOut
 //     (n: string)
 //     (t: string)
