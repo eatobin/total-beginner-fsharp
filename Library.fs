@@ -99,7 +99,7 @@ let notMaxedOut br bksOut = numBooksOut br bksOut < br.maxBooks
 
 let removeBook (bk: Book) (bks: Book list) : Book list = List.filter (fun b -> b <> bk) bks
 
-let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Book list =
+let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list) : Book list option =
     let maybeBookIn: BookIn option = findBookIn t bks
     let maybeBookOut: BookOut option = findBookOut t bks
     let maybeBorrower: Borrower option = findBorrower n brs
@@ -117,9 +117,9 @@ let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list)
 
         let oldBook: Book = maybeBookIn |> Option.get |> bookFromBookIn
         let fewerBooks: Book list = removeBook oldBook bks
-        newBook :: fewerBooks
+        Some(newBook :: fewerBooks)
     else
-        bks
+        None
 
 let br1: Borrower =
     { Borrower.name = "Borrower1"
@@ -157,7 +157,9 @@ let maybeBookOutFailIsIn: BookOut option = findBookOut "Title1" newBks
 let maybeBookOutFailIsNone: BookOut option = findBookOut "Nope" newBks
 let fewerBk1: Book list = removeBook bk1 newBks
 let fewerBk2: Book list = removeBook bk2 newBks
-let bk2InCheckedOut: Book list = checkOutBookIn "Borrower1" "Title2In" brs bks2
+
+let bk2InCheckedOut: Book list option =
+    checkOutBookIn "Borrower1" "Title2In" brs bks2
 
 
 
