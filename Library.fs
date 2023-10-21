@@ -59,6 +59,15 @@ let makeBookOutList (bks: Book list) : BookOut list =
         | Book.BookIn _ -> None
         | Book.BookOut bkOut -> Some bkOut)
 
+let bookFromBookIn (bkIn: BookIn) : Book = Book.BookIn bkIn
+
+let bookFromBookOut (bkOut: BookOut) : Book = Book.BookOut bkOut
+
+let makeBookList (bksIn: BookIn list) (bksOut: BookOut list) : Book list =
+    let bksFromIn: Book list = List.map bookFromBookIn bksIn
+    let bksFromOut: Book list = List.map bookFromBookOut bksOut
+    List.append bksFromIn bksFromOut
+
 let br1: Borrower =
     { Borrower.name = "Borrower1"
       Borrower.maxBooks = 1 }
@@ -72,18 +81,16 @@ let bk2Out: BookOut =
       BookOut.author = "Author1"
       BookOut.borrower = br1 }
 
-let bk1: Book = Book.BookIn bk1In
-let bk2: Book = Book.BookOut bk2Out
-
-let bookFromBookIn (bkIn: BookIn) : Book = Book.BookIn bkIn
-
-let bookFromBookOut (bkOut: BookOut) : Book = Book.BookOut bkOut
-
+let bk1: Book = bookFromBookIn bk1In
+let bk2: Book = bookFromBookOut bk2Out
 let bks: Book list = [ bk1; bk2 ]
+let bksIn: BookIn list = makeBookInList bks
+let bksOut: BookOut list = makeBookOutList bks
+let newBks: Book list = makeBookList bksIn bksOut
 
 let findItem (tgt: string) (coll: 'a list) (f: 'a -> string) : 'a option =
     let res = List.filter (fun item -> f item = tgt) coll
-    if res.IsEmpty then None else Some(res.Head)
+    List.tryHead res
 
 let getBooksOutForBorrower (br: Borrower) (bksOut: BookOut list) : BookOut list =
     List.filter (fun bkOut -> bkOut.borrower = br) bksOut
