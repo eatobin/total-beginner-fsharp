@@ -121,6 +121,20 @@ let checkOutBookIn (n: string) (t: string) (brs: Borrower list) (bks: Book list)
     else
         None
 
+let checkInBookOut (t: string) (bks: Book list) : Book list option =
+    let maybeBookIn: BookIn option = findBookIn t bks
+    let maybeBookOut: BookOut option = findBookOut t bks
+
+    if maybeBookIn |> Option.isNone && maybeBookOut |> Option.isSome then
+        let newBook: Book =
+            removeBorrowerFromBookOut (maybeBookOut |> Option.get) |> bookFromBookIn
+
+        let oldBook: Book = maybeBookOut |> Option.get |> bookFromBookOut
+        let fewerBooks: Book list = removeBook oldBook bks
+        Some(newBook :: fewerBooks)
+    else
+        None
+
 let br1: Borrower =
     { Borrower.name = "Borrower1"
       Borrower.maxBooks = 11 }
@@ -144,6 +158,7 @@ let bk3: Book = bookFromBookIn bk2In
 let brs: Borrower list = [ br1 ]
 let bks: Book list = [ bk1; bk2 ]
 let bks2: Book list = [ bk3 ]
+let bks3: Book list = [ bk2 ]
 let bksIn: BookIn list = makeBookInList bks
 let bksOut: BookOut list = makeBookOutList bks
 let newBks: Book list = makeBookList bksIn bksOut
@@ -157,34 +172,5 @@ let maybeBookOutFailIsIn: BookOut option = findBookOut "Title1" newBks
 let maybeBookOutFailIsNone: BookOut option = findBookOut "Nope" newBks
 let fewerBk1: Book list = removeBook bk1 newBks
 let fewerBk2: Book list = removeBook bk2 newBks
-
-let bk2InCheckedOut: Book list option =
-    checkOutBookIn "Borrower1" "Title2In" brs bks2
-
-
-
-
-
-
-
-// let checkInBookOut
-//     (n: string)
-//     (t: string)
-//     (brs: Borrower list)
-//     (bksIn: BookIn list)
-//     (bksOut: BookOut list)
-//     : BookIn list =
-//     let maybeBookIn = findItem t bksIn getTitleBookIn
-//     let maybeBookOut = findItem t bksOut getTitleBookOut
-//     let maybeBorrower = findItem n brs getName
-//
-//     if
-//         maybeBookIn |> Option.isNone
-//         && maybeBookOut |> Option.isSome
-//         && maybeBorrower |> Option.isSome
-//     then
-//         let newBookIn = removeBorrowerFromBookOut (maybeBookOut |> Option.get)
-//
-//         newBookIn :: bksIn
-//     else
-//         bksIn
+let bk2InCheckOut: Book list option = checkOutBookIn "Borrower1" "Title2In" brs bks2
+let bk2OutCheckIn: Book list option = checkInBookOut "Title2Out" bks3
