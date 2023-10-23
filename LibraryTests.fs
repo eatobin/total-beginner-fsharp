@@ -5,9 +5,7 @@ open FsUnit.Xunit
 
 open Library
 
-let br1: Borrower =
-    { Borrower.name = "Borrower1"
-      Borrower.maxBooks = 1 }
+
 
 let br2 =
     { Borrower.name = "Borrower2"
@@ -55,6 +53,66 @@ let bk5: BookOut =
 let bksIn1: BookIn list = [ bk1In ]
 let bksOut1: BookOut list = [ bk1Out ]
 // let bksOut2: Book list = [ bk1Out; bk2 ]
+
+
+
+
+
+
+
+
+let br1: Borrower =
+    { Borrower.name = "Borrower1"
+      Borrower.maxBooks = 11 }
+
+// let bk1In: BookIn =
+//     { BookIn.title = "Title1In"
+//       BookIn.author = "Author1In" }
+//
+// let bk2In: BookIn =
+//     { BookIn.title = "Title2In"
+//       BookIn.author = "Author2In" }
+//
+// let bk2Out: BookOut =
+//     { BookOut.title = "Title2Out"
+//       BookOut.author = "Author2Out"
+//       BookOut.borrower = br1 }
+//
+// let bk1: Book = bookFromBookIn bk1In
+// let bk2: Book = bookFromBookOut bk2Out
+// let bk3: Book = bookFromBookIn bk2In
+// let brs: Borrower list = [ br1 ]
+// let bks: Book list = [ bk1; bk2 ]
+// let bks2: Book list = [ bk3 ]
+// let bks3: Book list = [ bk2 ]
+// let bksIn: BookIn list = makeBookInList bks
+// let bksOut: BookOut list = makeBookOutList bks
+// let newBks: Book list = makeBookList bksIn bksOut
+// let maybeBorrowerPass: Borrower option = findBorrower "Borrower1" brs
+// let maybeBorrowerFail: Borrower option = findBorrower "Nope" brs
+// let maybeBookInPass: BookIn option = findBookIn "Title1" newBks
+// let maybeBookInFailIsOut: BookIn option = findBookIn "Title2" newBks
+// let maybeBookInFailIsNone: BookIn option = findBookIn "Nope" newBks
+// let maybeBookOutPass: BookOut option = findBookOut "Title2" newBks
+// let maybeBookOutFailIsIn: BookOut option = findBookOut "Title1" newBks
+// let maybeBookOutFailIsNone: BookOut option = findBookOut "Nope" newBks
+// let fewerBk1: Book list = removeBook bk1 newBks
+// let fewerBk2: Book list = removeBook bk2 newBks
+// let bk2InCheckOut: Book list option = checkOutBookIn "Borrower1" "Title2In" brs bks2
+// let bk2OutCheckIn: Book list option = checkInBookOut "Title2Out" bks3
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //
 // [<Fact>]
