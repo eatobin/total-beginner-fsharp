@@ -36,9 +36,9 @@ let bookToString (bk: Book) : string =
 
 let getName (br: Borrower) : string = br.name
 
-let getTitleBookIn (bkIn: BookIn) : string = bkIn.title
+// let getTitleBookIn (bkIn: BookIn) : string = bkIn.title
 
-let getTitleBookOut (bkOut: BookOut) : string = bkOut.title
+// let getTitleBookOut (bkOut: BookOut) : string = bkOut.title
 
 let getTitleBook (bk: Book) : string =
     match bk with
