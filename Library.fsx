@@ -162,13 +162,23 @@ let bksOut: BookOut list = makeBookOutList bks
 let newBks: Book list = makeBookList bksIn bksOut
 let maybeBorrowerPass: Borrower option = findBorrower "Borrower1" brs
 let maybeBorrowerFail: Borrower option = findBorrower "Nope" brs
-let maybeBookInPass: BookIn option = findBookIn "Title1" newBks
+let maybeBookInPass: BookIn option = findBookIn "Title1In" newBks
 let maybeBookInFailIsOut: BookIn option = findBookIn "Title2" newBks
 let maybeBookInFailIsNone: BookIn option = findBookIn "Nope" newBks
-let maybeBookOutPass: BookOut option = findBookOut "Title2" newBks
+let maybeBookOutPass: BookOut option = findBookOut "Title2Out" newBks
 let maybeBookOutFailIsIn: BookOut option = findBookOut "Title1" newBks
 let maybeBookOutFailIsNone: BookOut option = findBookOut "Nope" newBks
 let fewerBk1: Book list = removeBook bk1 newBks
 let fewerBk2: Book list = removeBook bk2 newBks
 let bk2InCheckOut: Book list option = checkOutBookIn "Borrower1" "Title2In" brs bks2
 let bk2OutCheckIn: Book list option = checkInBookOut "Title2Out" bks3
+
+
+
+let beginBooks: Book list = [ bk1; bk3 ]
+
+let afterCheckOut: Book list option =
+    checkOutBookIn "Borrower1" "Title1In" brs beginBooks
+
+let afterCheckIn: Book list option =
+    checkInBookOut "Title1In" (afterCheckOut |> Option.get)
